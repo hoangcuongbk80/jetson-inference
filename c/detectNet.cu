@@ -47,16 +47,11 @@ __global__ void gpuDetectionOverlay( T* input, T* output, int width, int height,
 		// check if this pixel is inside the bounding box
 		if( fx >= det.Left && fx <= det.Right && fy >= det.Top && fy <= det.Bottom )
 		{
-			if( fx < det.Left+2 || fx > det.Right-3 || fy < det.Top+2 || fy > det.Bottom-2 )
+			if( fx < det.Left+2 || fx > det.Right-2 || fy < det.Top+2 || fy > det.Bottom-2 )
 			{
-				const float4 color = colors[det.ClassID];	
-
-				const float alpha = color.w / 255.0f;
-				const float ialph = 1.0f - alpha;
-	
-				px_out.x = 255;//alpha * color.x + ialph * px_out.x;
-				px_out.y = 0;//alpha * color.y + ialph * px_out.y;
-				px_out.z = 0;//alpha * color.z + ialph * px_out.z;
+				px_out.x = 255;
+				px_out.y = 0;
+				px_out.z = 0;
 			}
 		}
 	}
